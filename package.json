@@ -1,0 +1,23 @@
+{
+  "name": "Scrim-s0l0llr6is",
+  "description": "https://scrimba.com/s0l0llr6is/head",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "nanoid": "5.0.9",
+    "quill": "^2.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-quill": "2.0.0",
+    "react-router-dom": "6.4.4",
+    "vite": "latest",
+    "web-vitals": "^4.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "*"
+  }
+}
