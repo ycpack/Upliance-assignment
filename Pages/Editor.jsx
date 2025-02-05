@@ -4,26 +4,32 @@ import "react-quill/dist/quill.snow.css"
 
 
 export default function Editor() {
-    // Get user data from localStorage
+    
     const getInitialContent = () => {
-        const savedContent = localStorage.getItem("richText");
-        if (savedContent) {
-            return savedContent; // If richText exists, use it
+        const userData = JSON.parse(localStorage.getItem("userData"))
+        const savedContent = localStorage.getItem("richText")
+    
+        if (savedContent && userData) {
+            const isUserDataChanged = JSON.stringify(userData) !== localStorage.getItem("lastUserData")
+            if (isUserDataChanged) {
+                localStorage.setItem("lastUserData", JSON.stringify(userData))
+                localStorage.removeItem("richText") // Reset editor if form data changed
+                return formatUserData(userData);  // Use new form data
+            }
+            return savedContent // Use edited content if user data is unchanged
         }
-
-        // Fallback to userData if richText is not available
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        if (!userData) return ""; // If no user data found, return empty string
-
-        // Format userData into HTML
-        return `
-            <h2>User Details</h2>
-            <p><strong>Name:</strong> ${userData.name}</p>
-            <p><strong>Address:</strong> ${userData.address}</p>
-            <p><strong>Email:</strong> ${userData.email}</p>
-            <p><strong>Phone:</strong> ${userData.phone}</p>
-        `;
-    };
+    
+        return userData ? formatUserData(userData) : "" // Use form data if no richText exists
+    }
+    
+    const formatUserData = (userData) => `
+        <h2>User Details</h2>
+        <p><strong>Name:</strong> ${userData.name}</p>
+        <p><strong>Address:</strong> ${userData.address}</p>
+        <p><strong>Email:</strong> ${userData.email}</p>
+        <p><strong>Phone:</strong> ${userData.phone}</p>
+    `
+    
 
     const [content, setContent] = React.useState(getInitialContent());
 

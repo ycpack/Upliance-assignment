@@ -30,6 +30,7 @@ export default function Form() {
 
         // Save to local storage
         localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.removeItem("richText")
         alert(`Data saved successfully! Your ID is: ${userId}`)
         setIsDirty(false)
     }
